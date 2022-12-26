@@ -1,6 +1,7 @@
 import WelComePage from "./pages/welcomePage";
 import LogInPage from "./pages/logInPage";
 import DashboardPage from "./pages/dashboardPage";
+import ErrorPage from "./pages/errorPage";
 
 const routes = [
   {
@@ -27,7 +28,7 @@ const routes = [
   {
     path: "*",
     name: "Error",
-    component: DashboardPage,
+    component: ErrorPage,
     isPrivate: true,
     layout: "private",
   },
