@@ -3,8 +3,8 @@ import { Navigate } from "react-router-dom";
 import CommonPage from "./commonPage";
 const PrivateRoutes = () => {
   useEffect(() => {
-    const toaken=
-    setAuth({token:})
+    const token=true
+    setAuth({token})
   }, []);
   const [auth, setAuth] = useState({ token: false });
   return auth.token ? <CommonPage auth={auth} /> : <Navigate to="/login" />;
