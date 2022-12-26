@@ -1,16 +1,59 @@
-import { Provider } from "react-redux";
-import { BrowserRouter } from "react-router-dom";
-import { Routers } from "./routes";
-import store from "./store";
+import React from "react";
+import { Navigate, Route, Routes } from "react-router";
+import RoutesList from "../src/router"
+// eslint-disable-next-line no-restricted-imports
 
-function App() {
+const App = () => {
+  // const user = useReducerData("auth", "user", "");
+  const user =true;
+
+  const renderRoutes = () => {
+    const isLogin = !!user;
+    const renderRoute = (Component, layout, isPrivate) => {
+      if (Component) {
+        switch (layout) {
+          case "private":
+            return isLogin && isPrivate ? (
+              // <PrivateLayout>
+                <Component />
+              // </PrivateLayout>
+            ) : (
+              <Navigate to="/" />
+            );
+          case "auth":
+            return isLogin ? (
+              <Navigate to="/" />
+            ) : (
+              // <AuthLayout>
+                <Component />
+              // </AuthLayout>
+            );
+          case "public":
+          default:
+            return (
+              // <PublicLayout>
+                <Component />
+              // </PublicLayout>
+            );
+        }
+      }
+      return null;
+    };
+
+    return RoutesList.map((route) => (
+      <Route
+        key={route.name}
+        path={route.path}
+        element={renderRoute(route.component, route.layout, route.isPrivate)}
+      />
+    ));
+  };
+
   return (
-    <Provider store={store}>
-      <BrowserRouter>
-        <Routers />
-      </BrowserRouter>
-    </Provider>
+    <div className="App">
+      <Routes>{renderRoutes()}</Routes>
+    </div>
   );
-}
+};
 
 export default App;
