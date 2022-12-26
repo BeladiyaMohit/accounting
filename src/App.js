@@ -1,11 +1,14 @@
 import React from "react";
 import { Navigate, Route, Routes } from "react-router";
-import RoutesList from "../src/router"
+import RoutesList from "../src/router";
+import AuthLayout from "./layout/AuthLayout";
+import PrivateLayout from "./layout/PrivateLayout";
+import PublicLayout from "./layout/PublicLayout";
 // eslint-disable-next-line no-restricted-imports
 
 const App = () => {
   // const user = useReducerData("auth", "user", "");
-  const user =true;
+  const user = true;
 
   const renderRoutes = () => {
     const isLogin = !!user;
@@ -14,9 +17,9 @@ const App = () => {
         switch (layout) {
           case "private":
             return isLogin && isPrivate ? (
-              // <PrivateLayout>
+              <PrivateLayout>
                 <Component />
-              // </PrivateLayout>
+              </PrivateLayout>
             ) : (
               <Navigate to="/" />
             );
@@ -24,16 +27,16 @@ const App = () => {
             return isLogin ? (
               <Navigate to="/" />
             ) : (
-              // <AuthLayout>
+              <AuthLayout>
                 <Component />
-              // </AuthLayout>
+              </AuthLayout>
             );
           case "public":
           default:
             return (
-              // <PublicLayout>
+              <PublicLayout>
                 <Component />
-              // </PublicLayout>
+              </PublicLayout>
             );
         }
       }

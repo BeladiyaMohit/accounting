@@ -11,7 +11,7 @@ const routes = [
     layout: "public",
   },
   {
-    path: "/signin",
+    path: "/login",
     name: "LogInPage",
     component: LogInPage,
     isPrivate: false,
@@ -20,6 +20,13 @@ const routes = [
   {
     path: "/dashboard",
     name: "DashboardPage",
+    component: DashboardPage,
+    isPrivate: true,
+    layout: "private",
+  },
+  {
+    path: "*",
+    name: "Error",
     component: DashboardPage,
     isPrivate: true,
     layout: "private",
